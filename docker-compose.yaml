@@ -1,0 +1,31 @@
+# Author: Sakthi Santhosh
+# Created on: 25/08/2023
+services:
+  flask_app:
+    build:
+      context: ./
+      dockerfile: ./docker/flask/Dockerfile
+      target: final
+    container_name: flask-app
+    networks:
+      - website_network
+    ports:
+      - 8000:8000
+    stop_signal: SIGINT
+
+  nginx_proxy:
+    build:
+      context: ./
+      dockerfile: ./docker/nginx/Dockerfile
+    container_name: nginx-proxy
+    depends_on:
+      - flask_app
+    networks:
+      - website_network
+    ports:
+      - 80:80
+
+networks:
+  website_network:
+    driver: bridge
+    name: website-network
