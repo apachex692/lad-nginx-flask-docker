@@ -14,6 +14,4 @@ COPY ./ ./
 COPY --from=build /usr/local/lib/python3.11/site-packages/ /usr/local/lib/python3.11/site-packages/
 COPY --from=build /usr/local/bin/ /usr/local/bin/
 
-EXPOSE 8000/tcp
-
 ENTRYPOINT gunicorn --bind 0.0.0.0:8000 --workers 4 "app:app_handle"

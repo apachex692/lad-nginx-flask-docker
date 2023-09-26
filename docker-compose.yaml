@@ -9,8 +9,6 @@ services:
     container_name: flask-app
     networks:
       - website_network
-    ports:
-      - 8000:8000
     stop_signal: SIGINT
 
   nginx_proxy:
